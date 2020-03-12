@@ -16,3 +16,10 @@ export const List = styled.FlatList.attrs({
   showsVerticalScrollIndicator: false,
   contentContainerStyle: { padding: 30 },
 })``;
+
+export const Text = styled.Text`
+  font-size: 20px;
+  color: #fff;
+  align-self: center;
+  margin-top: 20px;
+`;

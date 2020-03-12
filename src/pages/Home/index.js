@@ -4,53 +4,35 @@ import { useIsFocused } from '@react-navigation/native';
 import api from '~/services/api';
 
 import Background from '~/components/Background';
-import Appointment from '~/components/Appointment';
 
-import { Container, Title, List } from './styles';
+import { Container, Title, List, Text } from './styles';
 
-export default function Dashboard() {
-  const [appointments, setAppointments] = useState([]);
+export default function Home() {
+  const [users, setUsers] = useState([]);
 
   const isFocused = useIsFocused();
 
-  async function loadAppointments() {
-    const response = await api.get('appointments');
+  async function loadUsers() {
+    const response = await api.get('users');
 
-    setAppointments(response.data);
+    setUsers(response.data);
   }
 
   useEffect(() => {
     if (isFocused) {
-      loadAppointments();
+      loadUsers();
     }
   }, [isFocused]);
-
-  async function handleCancel(id) {
-    const response = await api.delete(`appointments/${id}`);
-
-    setAppointments(
-      appointments.map(appointment =>
-        appointment.id === id
-          ? {
-              ...appointment,
-              canceled_at: response.data.canceled_at,
-            }
-          : appointment
-      )
-    );
-  }
 
   return (
     <Background>
       <Container>
-        <Title>Agendamentos</Title>
+        <Title>Usuários</Title>
 
         <List
-          data={appointments}
+          data={users}
           keyExtractor={item => String(item.id)}
-          renderItem={({ item }) => (
-            <Appointment onCancel={() => handleCancel(item.id)} data={item} />
-          )}
+          renderItem={({ item }) => <Text>{item.name}</Text>}
         />
       </Container>
     </Background>

@@ -16,13 +16,13 @@ export function* signIn({ payload }) {
 
     const { token, user } = response.data;
 
-    if (user.provider) {
+    /* if (user.provider) {
       Alert.alert(
         'Erro no login',
         'O usuário não pode ser prestador de serviços'
       );
       return;
-    }
+    } */
 
     api.defaults.headers.Authorization = `Bearer ${token}`;
 
@@ -47,8 +47,6 @@ export function* signUp({ payload }) {
       email,
       password,
     });
-
-    // history.push('/');
   } catch (err) {
     Alert.alert(
       'Falha no cadastro',
