@@ -49,7 +49,8 @@ export default function Profile() {
   }
 
   function handleLogout() {
-    dispatch(signOut());
+    // dispatch(signOut());
+    setName('teste de click');
   }
 
   return (
