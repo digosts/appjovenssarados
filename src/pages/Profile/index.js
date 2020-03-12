@@ -49,8 +49,7 @@ export default function Profile() {
   }
 
   function handleLogout() {
-    // dispatch(signOut());
-    setName('teste de click');
+    dispatch(signOut());
   }
 
   return (
@@ -118,8 +117,12 @@ export default function Profile() {
             onChangeText={setConfirmPassword}
           />
 
-          <SubmitButton onPress={handleSubmit}>Atualizar perfil</SubmitButton>
-          <LogoutButton onPress={handleLogout}>Sair do GoBarber</LogoutButton>
+          <SubmitButton onPress={() => handleSubmit()}>
+            Atualizar perfil
+          </SubmitButton>
+          <LogoutButton onPress={() => handleLogout()}>
+            Sair do GoBarber
+          </LogoutButton>
         </Form>
       </Container>
     </Background>
