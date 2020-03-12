@@ -37,7 +37,7 @@ export default function Profile() {
   }, [profile]);
 
   function handleSubmit() {
-    /* dispatch(
+    dispatch(
       updateProfileRequest({
         name,
         email,
@@ -45,14 +45,11 @@ export default function Profile() {
         password,
         confirmPassword,
       })
-    ); */
-
-    console.tron.log('submit');
+    );
   }
 
-  function handleSair() {
-    console.tron.log('sair');
-    // dispatch(signOut());
+  function handleLogout() {
+    dispatch(signOut());
   }
 
   return (
@@ -123,7 +120,7 @@ export default function Profile() {
           <SubmitButton onPress={() => handleSubmit}>
             Atualizar perfil
           </SubmitButton>
-          <LogoutButton onPress={() => handleSair}>
+          <LogoutButton onPress={() => handleLogout}>
             Sair do GoBarber
           </LogoutButton>
         </Form>
