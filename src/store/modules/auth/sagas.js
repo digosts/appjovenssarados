@@ -16,19 +16,9 @@ export function* signIn({ payload }) {
 
     const { token, user } = response.data;
 
-    /* if (user.provider) {
-      Alert.alert(
-        'Erro no login',
-        'O usuário não pode ser prestador de serviços'
-      );
-      return;
-    } */
-
     api.defaults.headers.Authorization = `Bearer ${token}`;
 
     yield put(signInSuccess(token, user));
-
-    // history.push('/dashboard');
   } catch (err) {
     Alert.alert(
       'Falha na autenticação',
