@@ -29,7 +29,7 @@ export default function createRouter(isSigned = false) {
         activeTintColor: '#FFF',
         inactiveTintColor: 'rgba(255, 255, 255, 0.6)',
         style: {
-          backgroundColor: '#9b111e',
+          backgroundColor: '#d92121',
           borderTopColor: 'rgba(255, 255, 255, 0.6)',
         },
         keyboardHidesTabBar: true,

@@ -6,7 +6,7 @@ export const Container = styled.SafeAreaView`
 
 export const Title = styled.Text`
   font-size: 20px;
-  color: #fff;
+  color: #333;
   font-weight: bold;
   align-self: center;
   margin-top: 30px;
@@ -19,7 +19,13 @@ export const List = styled.FlatList.attrs({
 
 export const Text = styled.Text`
   font-size: 20px;
-  color: #fff;
+  color: #333;
   align-self: center;
   margin-top: 20px;
+`;
+
+export const ListItem = styled.View`
+  flex-direction: row;
+  align-content: center;
+  align-items: center;
 `;

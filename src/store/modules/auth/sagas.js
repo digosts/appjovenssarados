@@ -9,13 +9,12 @@ export function* signIn({ payload }) {
   try {
     const { email, password } = payload;
 
-    /* const response = yield call(api.post, 'sessions', {
+    const response = yield call(api.post, 'sessions', {
       email,
       password,
-    }); */
+    });
 
-    const token = 'aaaaa';
-    const user = 'Rodrigo';
+    const { token, user } = response.data;
 
     api.defaults.headers.Authorization = `Bearer ${token}`;
 

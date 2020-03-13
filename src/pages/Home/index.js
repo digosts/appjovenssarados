@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useIsFocused } from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import api from '~/services/api';
 
 import Background from '~/components/Background';
 
-import { Container, Title, List, Text } from './styles';
+import { Container, Title, List, ListItem, Text } from './styles';
 
 export default function Home() {
   const [users, setUsers] = useState([]);
@@ -42,7 +43,12 @@ export default function Home() {
         <List
           data={users}
           keyExtractor={item => String(item.id)}
-          renderItem={({ item }) => <Text>{item.name}</Text>}
+          renderItem={({ item }) => (
+            <ListItem>
+              <Icon name="add" size={18} color="#333" />
+              <Text>{item.name}</Text>
+            </ListItem>
+          )}
         />
       </Container>
     </Background>

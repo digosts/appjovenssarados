@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
+import { Alert } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 
 import Background from '~/components/Background';
@@ -17,18 +18,17 @@ import {
 
 export default function Profile() {
   const dispatch = useDispatch();
-  // const profile = useSelector(state => state.user.profile);
+  const profile = useSelector(state => state.user.profile);
+
+  const loading = useSelector(state => state.auth.loading);
 
   const emailRef = useRef();
   const oldPasswordRef = useRef();
   const passwordRef = useRef();
   const confirmPasswordRef = useRef();
 
-  // const [name, setName] = useState(profile.name);
-  // const [email, setEmail] = useState(profile.email);
-
-  const [name, setName] = useState('Rodrigo');
-  const [email, setEmail] = useState('rbragamail');
+  const [name, setName] = useState(profile.name);
+  const [email, setEmail] = useState(profile.email);
 
   const [oldPassword, setOldPassword] = useState('');
   const [password, setPassword] = useState('');
@@ -41,6 +41,12 @@ export default function Profile() {
   }, []);
 
   function handleSubmit() {
+    if (!name || !email) {
+      Alert.alert('Aviso', 'Favor Informe seu nome e email!');
+    } else if (oldPassword && (!password || !confirmPassword)) {
+      Alert.alert('Aviso', 'Favor preencha os campos de senha!');
+    }
+
     dispatch(
       updateProfileRequest({
         name,
@@ -70,7 +76,7 @@ export default function Profile() {
             returnKeyType="next"
             onSubmitEditing={() => emailRef.current.focus()}
             value={name}
-            onChangeText={() => handleLogout()}
+            onChangeText={setName}
           />
 
           <FormInput
@@ -121,7 +127,9 @@ export default function Profile() {
             onChangeText={setConfirmPassword}
           />
 
-          <SubmitButton onPress={handleSubmit}>Atualizar perfil</SubmitButton>
+          <SubmitButton loading={loading} onPress={handleSubmit}>
+            Salvar
+          </SubmitButton>
           <LogoutButton onPress={handleLogout}>Sair</LogoutButton>
         </Form>
       </Container>
