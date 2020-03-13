@@ -19,7 +19,6 @@ import {
 export default function Profile() {
   const dispatch = useDispatch();
   const profile = useSelector(state => state.user.profile);
-
   const loading = useSelector(state => state.auth.loading);
 
   const emailRef = useRef();

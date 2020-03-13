@@ -11,6 +11,7 @@ import SignUp from './pages/SignUp';
 
 import Home from './pages/Home';
 import Profile from './pages/Profile';
+import Cifra from './pages/Cifra';
 
 Icon.loadFont();
 
@@ -36,10 +37,10 @@ export default function createRouter(isSigned = false) {
       }}
     >
       <Tabs.Screen
-        name="Dashboard"
+        name="Cifras"
         component={Home}
         options={{
-          tabBarLabel: 'Início',
+          tabBarLabel: 'Cifras',
           tabBarIcon: ({ color }) => (
             <Icon name="event" size={20} color={color} />
           ),
@@ -50,6 +51,16 @@ export default function createRouter(isSigned = false) {
         component={Profile}
         options={{
           tabBarLabel: 'Meu Perfil',
+          tabBarIcon: ({ color }) => (
+            <Icon name="person" size={20} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="Cifra"
+        component={Cifra}
+        options={{
+          tabBarLabel: 'Notas',
           tabBarIcon: ({ color }) => (
             <Icon name="person" size={20} color={color} />
           ),
