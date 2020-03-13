@@ -17,15 +17,19 @@ import {
 
 export default function Profile() {
   const dispatch = useDispatch();
-  const profile = useSelector(state => state.user.profile);
+  // const profile = useSelector(state => state.user.profile);
 
   const emailRef = useRef();
   const oldPasswordRef = useRef();
   const passwordRef = useRef();
   const confirmPasswordRef = useRef();
 
-  const [name, setName] = useState(profile.name);
-  const [email, setEmail] = useState(profile.email);
+  // const [name, setName] = useState(profile.name);
+  // const [email, setEmail] = useState(profile.email);
+
+  const [name, setName] = useState('Rodrigo');
+  const [email, setEmail] = useState('rbragamail');
+
   const [oldPassword, setOldPassword] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -34,7 +38,7 @@ export default function Profile() {
     setOldPassword('');
     setPassword('');
     setConfirmPassword('');
-  }, [profile]);
+  }, []);
 
   function handleSubmit() {
     dispatch(
@@ -66,7 +70,7 @@ export default function Profile() {
             returnKeyType="next"
             onSubmitEditing={() => emailRef.current.focus()}
             value={name}
-            onChangeText={setName}
+            onChangeText={() => handleLogout()}
           />
 
           <FormInput

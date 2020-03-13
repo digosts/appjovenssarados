@@ -12,15 +12,25 @@ export default function Home() {
 
   const isFocused = useIsFocused();
 
-  async function loadUsers() {
+  /* async function loadUsers() {
     const response = await api.get('users');
 
     setUsers(response.data);
-  }
+  } */
 
   useEffect(() => {
     if (isFocused) {
-      loadUsers();
+      // loadUsers();
+      setUsers([
+        {
+          id: 1,
+          name: 'Rodrigo',
+        },
+        {
+          id: 2,
+          name: 'Bruna',
+        },
+      ]);
     }
   }, [isFocused]);
 
