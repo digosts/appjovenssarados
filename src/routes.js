@@ -1,71 +1,69 @@
-/* eslint-disable react/prop-types */
-import React from 'react';
-
+import * as React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Ionicons } from '@expo/vector-icons';
 
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import Home from './screens/Home'
+import Frase from './screens/Frase'
 
-import SignIn from './pages/SignIn';
-import SignUp from './pages/SignUp';
+import Cifras from './screens/Cifras'
+import Cifra from './screens/Cifra'
 
-import Home from './pages/Home';
-import Profile from './pages/Profile';
-import Cifra from './pages/Cifra';
+const HomeStack = createStackNavigator();
 
-Icon.loadFont();
-
-const Stack = createStackNavigator();
-const Tabs = createBottomTabNavigator();
-
-export default function createRouter(isSigned = false) {
-  return !isSigned ? (
-    <Stack.Navigator headerMode="none">
-      <Stack.Screen name="SignIn" component={SignIn} />
-      <Stack.Screen name="SignUp" component={SignUp} />
-    </Stack.Navigator>
-  ) : (
-    <Tabs.Navigator
-      tabBarOptions={{
-        activeTintColor: '#FFF',
-        inactiveTintColor: 'rgba(255, 255, 255, 0.6)',
-        style: {
-          backgroundColor: '#d92121',
-          borderTopColor: 'rgba(255, 255, 255, 0.6)',
-        },
-        keyboardHidesTabBar: true,
-      }}
+function HomeStackScreen() {
+  return (
+    <HomeStack.Navigator
+      headerMode='none'
     >
-      <Tabs.Screen
-        name="Cifras"
-        component={Home}
-        options={{
-          tabBarLabel: 'Cifras',
-          tabBarIcon: ({ color }) => (
-            <Icon name="event" size={20} color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="Profile"
-        component={Profile}
-        options={{
-          tabBarLabel: 'Meu Perfil',
-          tabBarIcon: ({ color }) => (
-            <Icon name="person" size={20} color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="Cifra"
-        component={Cifra}
-        options={{
-          tabBarLabel: 'Notas',
-          tabBarIcon: ({ color }) => (
-            <Icon name="person" size={20} color={color} />
-          ),
-        }}
-      />
-    </Tabs.Navigator>
+      <HomeStack.Screen name="Frases" component={Home} />
+      <HomeStack.Screen name="Frase" component={Frase} />
+    </HomeStack.Navigator>
+  );
+}
+
+const CifrasStack = createStackNavigator();
+
+function CifrastackScreen() {
+  return (
+    <CifrasStack.Navigator
+      headerMode='none'
+    >
+      <CifrasStack.Screen name="Cifras" component={Cifras} />
+      <CifrasStack.Screen name="Cifra" component={Cifra} />
+    </CifrasStack.Navigator>
+  );
+}
+
+const Tab = createBottomTabNavigator();
+
+export default function Routes() {
+  return (
+    <NavigationContainer>
+      <Tab.Navigator
+        screenOptions={({ route }) => ({
+          tabBarIcon: ({ focused, color, size }) => {
+            let iconName;
+
+            if (route.name === 'Home') {
+              iconName = focused
+                ? 'md-chatboxes'
+                : 'md-chatboxes';
+            } else if (route.name === 'Cifras') {
+              iconName = focused ? 'ios-list-box' : 'ios-list';
+            }
+
+            return <Ionicons name={iconName} size={size} color={color} />;
+          },
+        })}
+        tabBarOptions={{
+          activeTintColor: '#d90c1e',
+          inactiveTintColor: 'gray',
+        }}>
+        <Tab.Screen name="Home" component={HomeStackScreen} />
+        <Tab.Screen name="Cifras" component={CifrastackScreen} />
+      </Tab.Navigator>
+    </NavigationContainer>
   );
 }
